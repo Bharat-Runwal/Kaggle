@@ -7,7 +7,7 @@ class bert_dataset:
         self.target = target 
         self.tokenizer = config.tokenizer
         self.max_len  = config.max_len
-    def __getitem__(self,itme):
+    def __getitem__(self,item):
         review = str(self.review)
         review = " ".join(review.split())
 
@@ -32,6 +32,6 @@ class bert_dataset:
             'ids': torch.Tensor(ids,dtype = torch.long),
             'mask' : torch.Tensor(mask , dtype = torch.long), 
             'token_type_ids': torch.Tensor(token_type_ids,dtype = torch.long),
-            'target': torch.tensor(self.target[item] ,dtype=torch.float)
+            'targets': torch.tensor(self.target[item] ,dtype=torch.float)
 
         }  
