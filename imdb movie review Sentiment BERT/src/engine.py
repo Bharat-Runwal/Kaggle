@@ -2,7 +2,7 @@ from tqdm import tqdm
 import torch 
 import torch.nn as nn 
 
-def train_fn(data_loader,model ,optimizer,device):
+def train_fn(data_loader,model ,optimizer,device,scheduler):
     model.train()
 
     for i, d in tqdm(enumerate(data_loader),total = len(data_loader)):

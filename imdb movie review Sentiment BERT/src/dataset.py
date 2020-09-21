@@ -29,9 +29,9 @@ class bert_dataset:
         token_type_ids = token_type_ids +([0] *padding_len)       
 
         return {
-            'ids': torch.Tensor(ids,dtype = torch.long),
-            'mask' : torch.Tensor(mask , dtype = torch.long), 
-            'token_type_ids': torch.Tensor(token_type_ids,dtype = torch.long),
+            'ids': torch.tensor(ids,dtype = torch.long),
+            'mask' : torch.tensor(mask , dtype = torch.long), 
+            'token_type_ids': torch.tensor(token_type_ids,dtype = torch.long),
             'targets': torch.tensor(self.target[item] ,dtype=torch.float)
 
         }  
