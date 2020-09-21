@@ -8,18 +8,18 @@ class bert_dataset:
         self.tokenizer = config.tokenizer
         self.max_len  = config.max_len
     def __getitem__(self,item):
-        review = str(self.review)
+        review = str(self.review[item])
         review = " ".join(review.split())
-
+    
         inputs = self.tokenizer.encode_plus(
             review,
             None,
             add_special_tokens = True,
             max_length = self.max_len
-        )
+                   )
 
         ids  = inputs["input_ids"]
-        mask = inputs["attention_mask"]
+        mask = inputs["special_tokens_mask"]
         token_type_ids =  inputs["token_type_ids"]
 
         padding_len = self.max_len - len(ids)
@@ -35,3 +35,6 @@ class bert_dataset:
             'targets': torch.tensor(self.target[item] ,dtype=torch.float)
 
         }  
+
+    def __len__(self):
+        return len(self.review)

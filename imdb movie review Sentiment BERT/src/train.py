@@ -42,7 +42,7 @@ def run():
 
     model = BERTBaseUncased()
 
-    param_optimizer = list(model.named_parameters)
+    param_optimizer = list(model.named_parameters())
     no_decay = ["bias","LayerNorm.bias","LayerNorm.weight"]
     optimizer_params= [
         {"params": [p for n,p in param_optimizer if not any(nd in n for nd in no_decay)],'weight_decay':0.001},
@@ -52,11 +52,11 @@ def run():
     num_train_steps = int(len(df_train)/config.train_batch) * config.epochs
 
     optimizer = AdamW(optimizer_params,lr=3e-5)
-    
+     
     scheduler= WarmupLinearSchedule(
         optimizer=optimizer,
          warmup_steps=0,
-         num_train_steps=num_train_steps
+         t_total=num_train_steps
          )
     
     best_accuracy = 0 

@@ -1,10 +1,11 @@
 import transformers
 import torch.nn as nn 
+import config
 
 class BERTBaseUncased(nn.Module):
     def __init__(self):
         super(BERTBaseUncased,self).__init__() 
-        self.bert = transformers.BertModel('bert-base-uncased')
+        self.bert = transformers.BertModel.from_pretrained('bert-base-uncased')
         self.b_dropout = nn.Dropout(0.3)
         self.out = nn.Linear(768,1)
 
